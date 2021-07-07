@@ -14,14 +14,28 @@ variable "common_tags" {
 
 # VPC
 
+variable "create_vpc" {
+  type        = bool
+  description = "If true, create a VPC to place resources in."
+  default     = false
+}
+
+variable "vpc_cidr" {
+  type        = string
+  description = "If creating a VPC, use this CIDR."
+  default     = "10.0.0.0/20"
+}
+
 variable "private_subnets" {
   type        = list(string)
-  description = "Private VPC subnets to deploy tfc-agent ECS service."
+  description = "If *not* creating a VPC, use these VPC subnets."
+  default     = [""]
 }
 
 variable "security_groups" {
   type        = list(string)
-  description = "Security group IDs"
+  description = "If *not* creating a VPC, use these VPC security groups."
+  default     = [""]
 }
 
 # ECS
