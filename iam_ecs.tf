@@ -1,12 +1,5 @@
 # IAM Permissions used by TFC Agent running in ECS
 
-data "aws_iam_role" "admin" {
-  name = "${var.aws_account_name}-admin"
-}
-data "aws_iam_role" "developer" {
-  name = "${var.aws_account_name}-developer"
-}
-
 # Common to all ECS-base permissions, derived from
 # arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
 data "aws_iam_policy_document" "ecs_task_common_policy" {
@@ -115,22 +108,6 @@ data "aws_iam_policy_document" "assume_runtime" {
     principals {
       identifiers = ["ecs-tasks.amazonaws.com"]
       type        = "Service"
-    }
-  }
-  statement {
-    effect = "Allow"
-    actions = [
-      "sts:AssumeRole",
-      "sts:TagSession",
-      "sts:SetSourceIdentity",
-    ]
-    principals {
-      identifiers = [
-        # Ease overhead of terraform import
-        data.aws_iam_role.developer.arn,
-        data.aws_iam_role.admin.arn,
-      ]
-      type = "AWS"
     }
   }
 }

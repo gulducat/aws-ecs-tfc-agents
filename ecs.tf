@@ -49,7 +49,7 @@ locals {
         },
         {
           name  = "TFC_AGENT_NAME"
-          value = "${var.aws_account_name}-ecs"
+          value = "${var.name}-ecs"
         },
         {
           name  = "TFC_AGENT_LOG_LEVEL"
