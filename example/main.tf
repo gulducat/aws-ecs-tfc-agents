@@ -1,15 +1,3 @@
-# setup steps:
-# * edit var.tfc_org and terraform{backend{ organization }}
-#   as appropriate to match your TFC organization
-# * tf workspace new dev
-#   creates a workspace in TFC
-# * edit settings in "tfc-agents-dev" workspace in TFC
-#   Settings -> General -> Execution Mode -> Local
-#   and
-#   Remote state sharing -> Share state globally
-# * tf init
-# * tf apply
-
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
@@ -41,7 +29,7 @@ resource "aws_ssm_parameter" "runner_token" {
 }
 
 module "ecs" {
-  source = "../"
+  source = "github.com/gulducat/aws-ecs-tfc-agents?ref=v0.1.0"
   name   = var.name
 
   create_vpc = true
