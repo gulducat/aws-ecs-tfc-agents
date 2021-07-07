@@ -21,10 +21,14 @@ variable "tfc_agent_token_param_name" {
   default     = "app.terraform.io/tfc-agent"
 }
 
-variable "vpc_cidr" {
-  type        = string
-  description = "CIDR range to provision the TFC agents / ECS VPC with."
-  default     = "10.0.0.0/20"
+variable "private_subnets" {
+  type = list(string)
+  description = "Private VPC subnets to deploy tfc-agent ECS service."
+}
+
+variable "security_groups" {
+  type = list(string)
+  description = "Security group IDs"
 }
 
 variable "cpu_count" {

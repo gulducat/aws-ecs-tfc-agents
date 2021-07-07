@@ -12,8 +12,8 @@ resource "aws_ecs_service" "tfc_agent" {
   task_definition = aws_ecs_task_definition.tfc_agent.arn
   tags            = var.common_tags
   network_configuration {
-    security_groups  = [aws_security_group.tfc_agent.id]
-    subnets          = module.vpc.private_subnets
+    security_groups  = var.security_groups
+    subnets          = var.private_subnets
     assign_public_ip = false
   }
 }
