@@ -67,11 +67,10 @@ locals {
         options = {
           awslogs-create-group  = "true"
           awslogs-group         = "/hc/ecs-task/${var.name}"
-          awslogs-region        = "${var.region}"
+          awslogs-region        = data.aws_region.current.name
           awslogs-stream-prefix = "logs"
         }
       }
     }
-    ]
-  )
+  ])
 }

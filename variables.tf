@@ -24,12 +24,6 @@ variable "name" {
   default     = "tfc-agent_hc-crt-vault"
 }
 
-variable "region" {
-  type        = string
-  description = "AWS Region to operate resoureces from"
-  default     = "us-west-2"
-}
-
 variable "tfc_agent_token_param_name" {
   type        = string
   description = "SSM parameter store path containing the Terraform Cloud agent token to launch our agent ECS tasks with. (TFC Organization Settings >> Agents)"
