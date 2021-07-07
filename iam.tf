@@ -91,7 +91,7 @@ data "aws_iam_policy_document" "runtime_specific" {
       "sts:TagSession",
       "sts:SetSourceIdentity",
     ]
-    resources = var.allow_assume_role_arn
+    resources = var.allow_assume_role_arns
   }
 }
 data "aws_iam_policy_document" "assume_runtime" {

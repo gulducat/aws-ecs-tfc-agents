@@ -1,6 +1,6 @@
 resource "aws_ecs_cluster" "tfc_agent" {
   name               = "${var.name}Cluster"
-  capacity_providers = ["FARGATE_SPOT"]
+  capacity_providers = var.capacity_providers
   tags               = var.common_tags
 }
 
@@ -8,7 +8,7 @@ resource "aws_ecs_service" "tfc_agent" {
   name            = "${var.name}Service"
   cluster         = aws_ecs_cluster.tfc_agent.id
   launch_type     = "FARGATE"
-  desired_count   = var.desired_count
+  desired_count   = var.num_agents
   task_definition = aws_ecs_task_definition.tfc_agent.arn
   tags            = var.common_tags
   network_configuration {
@@ -34,7 +34,7 @@ locals {
   agent_task_definition = jsonencode([
     {
       name      = "tfc-agent"
-      image     = "docker.mirror.hashicorp.services/hashicorp/tfc-agent:latest"
+      image     = var.tfc_agent_image
       essential = true
       cpu       = local.cpu
       memory    = local.memory
