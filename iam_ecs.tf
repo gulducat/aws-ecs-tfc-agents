@@ -70,7 +70,7 @@ resource "aws_iam_role" "init" {
   name               = "${var.name}-ecs-task-init-profile"
   description        = "Used by ECS to setup/initialize ${var.name} Tasks."
   assume_role_policy = data.aws_iam_policy_document.assume_init.json
-  tags               = local.common_tags
+  tags               = var.common_tags
 }
 
 resource "aws_iam_role_policy" "init" {
@@ -140,7 +140,7 @@ resource "aws_iam_role" "runtime" {
   name               = "${var.name}-ecs-task-agent-profile"
   description        = "Used by ${var.name} Tasks during Runtime."
   assume_role_policy = data.aws_iam_policy_document.assume_runtime.json
-  tags               = local.common_tags
+  tags               = var.common_tags
 }
 
 resource "aws_iam_role_policy" "runtime" {

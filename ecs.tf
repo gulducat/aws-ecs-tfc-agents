@@ -1,7 +1,7 @@
 resource "aws_ecs_cluster" "tfc_agent" {
   name               = "${var.name}Cluster"
   capacity_providers = ["FARGATE_SPOT"]
-  tags               = local.common_tags
+  tags               = var.common_tags
 }
 
 resource "aws_ecs_service" "tfc_agent" {
@@ -10,7 +10,7 @@ resource "aws_ecs_service" "tfc_agent" {
   launch_type     = "FARGATE"
   desired_count   = var.desired_count
   task_definition = aws_ecs_task_definition.tfc_agent.arn
-  tags            = local.common_tags
+  tags            = var.common_tags
   network_configuration {
     security_groups  = [aws_security_group.tfc_agent.id]
     subnets          = module.vpc.private_subnets
@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "tfc_agent" {
   task_role_arn            = aws_iam_role.runtime.arn
   cpu                      = local.cpu
   memory                   = local.memory
-  tags                     = local.common_tags
+  tags                     = var.common_tags
 }
 
 locals {

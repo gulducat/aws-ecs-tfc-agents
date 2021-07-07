@@ -25,14 +25,14 @@ module "vpc" {
   single_nat_gateway     = true
   one_nat_gateway_per_az = false
 
-  tags = local.common_tags
+  tags = var.common_tags
 }
 
 resource "aws_security_group" "tfc_agent" {
   name_prefix = "${var.name}-sg"
   description = "Security group for tfc-agent"
   vpc_id      = module.vpc.vpc_id
-  tags        = local.common_tags
+  tags        = var.common_tags
   lifecycle {
     create_before_destroy = true
   }

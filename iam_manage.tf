@@ -24,7 +24,7 @@ resource "aws_iam_role" "tf_manage" {
   name               = "${var.name}-tf-manage"
   description        = "Role to be assumed by TFC hc-common-release-tooling-vault/* workspaces when accessing/mutating resources."
   assume_role_policy = data.aws_iam_policy_document.assume_tf_manage.json
-  tags               = local.common_tags
+  tags               = var.common_tags
 }
 
 resource "aws_iam_role_policy" "tf_manage_base" {

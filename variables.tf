@@ -7,6 +7,12 @@ variable "aws_assume_role_arn" {
   description = "The IAM role ARN to be assumed in the AWS provider arguments / used to manage AWS resources' lifecycles."
 }
 
+variable "common_tags" {
+  type        = map(string)
+  description = "Tags to apply to all resources."
+  default     = {}
+}
+
 variable "desired_count" {
   description = "Number of parallel tasks"
   default     = 1
@@ -38,11 +44,7 @@ variable "vpc_cidr" {
 
 locals {
   tfc_agent_token_parameter_arn = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.tfc_agent_token_param_name}"
-  common_tags = {
-    hc-owner-dl       = "team-engserv-vault+tfc@hashicorp.com"
-    hc-config-as-code = "terraform"
-    hc-repo           = "github.com/hashicorp/engservices-crt-vault"
-  }
+
   cpu    = 1024 * 2      # vCPU count
   memory = local.cpu * 2 # memory must be minimum-double CPU
 }
