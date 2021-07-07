@@ -77,8 +77,7 @@ resource "aws_iam_role_policy" "init" {
 #####
 
 # This should _only_ be on the runtime role
-# Allows Task to Assume Role into `tfc-hc-common-release-tooling-vault` IAM Role.
-# This also allows Task to Assume Role cross-account.
+# Allows Task to AssumeRole into other roles
 resource "aws_iam_role_policy" "runtime_specific" {
   role   = aws_iam_role.runtime.name
   name   = "AssumeRole"
@@ -92,9 +91,7 @@ data "aws_iam_policy_document" "runtime_specific" {
       "sts:TagSession",
       "sts:SetSourceIdentity",
     ]
-    resources = [
-      aws_iam_role.tf_manage.arn,
-    ]
+    resources = var.allow_assume_role_arn
   }
 }
 data "aws_iam_policy_document" "assume_runtime" {

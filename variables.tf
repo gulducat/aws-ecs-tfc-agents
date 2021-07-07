@@ -43,3 +43,9 @@ locals {
   cpu    = 1024 * var.cpu_count
   memory = local.cpu * 2 # memory must be minimum-double CPU
 }
+
+variable "allow_assume_role_arn" {
+  type        = list(string)
+  description = "List of IAM role ARNs that ECS tasks are allowed to assume."
+  default     = ["*"]
+}
