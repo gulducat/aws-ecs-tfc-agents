@@ -66,7 +66,7 @@ locals {
         logDriver = "awslogs"
         options = {
           awslogs-create-group  = "true"
-          awslogs-group         = "/hc/ecs-task/${var.name}"
+          awslogs-group         = local.cloudwatch_log_group
           awslogs-region        = data.aws_region.current.name
           awslogs-stream-prefix = "logs"
         }

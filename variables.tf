@@ -38,6 +38,8 @@ variable "cpu_count" {
 }
 
 locals {
+  cloudwatch_log_group = "/ecs-task/${var.name}"
+
   tfc_agent_token_parameter_arn = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.tfc_agent_token_param_name}"
 
   cpu    = 1024 * var.cpu_count
