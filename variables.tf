@@ -70,7 +70,7 @@ variable "tfc_agent_env_vars" {
   default = [
     {
       name  = "TFC_AGENT_DISABLE_UPDATE"
-      value = "value"
+      value = "true"
     },
     {
       name  = "TFC_AGENT_SINGLE"
