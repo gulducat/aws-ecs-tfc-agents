@@ -38,7 +38,7 @@ locals {
       essential = true
       cpu       = local.cpu
       memory    = local.memory
-      environment = merge([{
+      environment = concat([{
         name  = "TFC_AGENT_NAME"
         value = "${var.name}-ecs"
       }], var.tfc_agent_env_vars)
