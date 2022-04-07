@@ -60,8 +60,27 @@ variable "num_agents" {
 
 variable "tfc_agent_image" {
   type        = string
-  description = "TFC agent docker image.  Be mindful of docker hub rate limits"
+  description = "TFC agent docker image. Be mindful of docker hub rate limits"
   default     = "tfc-agent:latest"
+}
+
+variable "tfc_agent_env_vars" {
+  type        = list(object({ name = string, value = string }))
+  description = "A list of environment variables that should be present on each TFC agent."
+  default = [
+    {
+      name  = "TFC_AGENT_DISABLE_UPDATE"
+      value = "value"
+    },
+    {
+      name  = "TFC_AGENT_SINGLE"
+      value = "true"
+    },
+    {
+      name  = "TFC_AGENT_LOG_LEVEL"
+      value = "info"
+    }
+  ]
 }
 
 # IAM and secrets
