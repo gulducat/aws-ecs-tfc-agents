@@ -38,24 +38,10 @@ locals {
       essential = true
       cpu       = local.cpu
       memory    = local.memory
-      environment = [
-        {
-          name  = "TFC_AGENT_DISABLE_UPDATE"
-          value = "true"
-        },
-        {
-          name  = "TFC_AGENT_SINGLE"
-          value = "true"
-        },
-        {
-          name  = "TFC_AGENT_NAME"
-          value = "${var.name}-ecs"
-        },
-        {
-          name  = "TFC_AGENT_LOG_LEVEL"
-          value = "info"
-        },
-      ]
+      environment = concat([{
+        name  = "TFC_AGENT_NAME"
+        value = "${var.name}-ecs"
+      }], var.tfc_agent_env_vars)
       secrets = [
         {
           name      = "TFC_AGENT_TOKEN"
